@@ -1,0 +1,22 @@
+# Dependencies & build output
+node_modules/
+dist/
+www/
+.angular/
+bin/
+obj/
+.vs/
+*.user
+
+# Runtime data / user uploads (never commit real user files)
+uploads/
+Backups/
+
+# Secrets & local config (never commit real values)
+.env
+appsettings.*.local.json
+*Deployment*.txt
+
+# OS / logs
+.DS_Store
+*.log

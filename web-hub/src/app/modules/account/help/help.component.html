@@ -1,0 +1,52 @@
+<div class="help-page">
+  <div class="help-page__header">
+    <h1>Help &amp; Documentation</h1>
+    <p>Everything you need to know about using EquaMeridian Hub — search below, or browse by topic.</p>
+
+    <div class="help-page__search">
+      <input
+        type="text"
+        [(ngModel)]="query"
+        (ngModelChange)="onSearch()"
+        placeholder="Search help — e.g. &quot;VAT&quot;, &quot;dispute&quot;, &quot;forgot password&quot;"
+        aria-label="Search help"
+      />
+    </div>
+  </div>
+
+  <!-- Getting-started walkthrough video. Business case: a recorded walkthrough gets a
+       new supplier/contractor oriented far faster than reading text, and is the first thing shown
+       on this page. Served directly as a static asset (public/videos/workflow-walkthrough.mp4)
+       so it deploys with the rest of the static site — no external video host needed. -->
+  <div class="help-page__video">
+    <h2>Getting Started (video walkthrough)</h2>
+    <div class="help-page__video-frame">
+      <video
+        controls
+        preload="metadata"
+        title="EquaMeridian getting started walkthrough">
+        <source src="videos/workflow-walkthrough.mp4" type="video/mp4" />
+        Your browser doesn't support embedded video. You can
+        <a href="videos/workflow-walkthrough.mp4">download the walkthrough</a> instead.
+      </video>
+    </div>
+  </div>
+
+  <div class="help-page__empty" *ngIf="results.length === 0">
+    No help topics match "{{ query }}". Try a different word, or ask the chat assistant in the corner.
+  </div>
+
+  <div class="help-page__category" *ngFor="let category of categories">
+    <h2>{{ category }}</h2>
+
+    <article
+      class="help-section"
+      *ngFor="let section of sectionsFor(category)"
+      [id]="'help-' + section.id"
+      [class.help-section--active]="activeSectionId === section.id"
+    >
+      <h3>{{ section.title }}</h3>
+      <p *ngFor="let paragraph of section.body">{{ paragraph }}</p>
+    </article>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="public-shell" [class.menu-open]="menuOpen">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="public-header">
+    <a routerLink="/" class="public-header__brand" (click)="closeMenu()">
+      <img
+        class="brand-logo brand-logo--header"
+        src="assets/brand/logo-mark.png"
+        width="36"
+        height="36"
+        alt=""
+      />
+      <span class="logo-text">
+        <span class="logo-text__name">EquaMeridian</span>
+        <span class="logo-text__hub">Hub</span>
+      </span>
+    </a>
+
+    <button
+      type="button"
+      class="public-header__toggle"
+      [attr.aria-expanded]="menuOpen"
+      aria-controls="public-nav"
+      aria-label="Toggle navigation"
+      (click)="toggleMenu()"
+    >
+      <span class="public-header__toggle-bar" aria-hidden="true"></span>
+      <span class="public-header__toggle-bar" aria-hidden="true"></span>
+      <span class="public-header__toggle-bar" aria-hidden="true"></span>
+    </button>
+
+    <nav id="public-nav" class="public-header__nav" aria-label="Primary" [class.is-open]="menuOpen">
+      <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
+      <a routerLink="/browse" routerLinkActive="is-active" (click)="closeMenu()">Browse machinery</a>
+      <a href="#how-it-works" class="nav-anchor" *ngIf="isHome" (click)="closeMenu()">How it works</a>
+
+      <div class="public-header__nav-actions">
+        <ng-container *ngIf="!auth.isLoggedIn; else loggedInNav">
+          <a routerLink="/auth/login" class="btn-nav btn-nav--ghost" (click)="closeMenu()">Log in</a>
+          <a routerLink="/auth/register" class="btn-nav btn-nav--solid" (click)="closeMenu()">Register</a>
+        </ng-container>
+        <ng-template #loggedInNav>
+          <button type="button" class="btn-nav btn-nav--solid" (click)="closeMenu(); auth.redirectByRole()">
+            Go to dashboard
+          </button>
+        </ng-template>
+      </div>
+    </nav>
+
+    <div class="public-header__actions public-header__actions--desktop">
+      <ng-container *ngIf="!auth.isLoggedIn; else loggedIn">
+        <a routerLink="/auth/login" class="btn-nav btn-nav--ghost">Log in</a>
+        <a routerLink="/auth/register" class="btn-nav btn-nav--solid">Register</a>
+      </ng-container>
+      <ng-template #loggedIn>
+        <button type="button" class="btn-nav btn-nav--solid" (click)="auth.redirectByRole()">
+          Go to dashboard
+        </button>
+      </ng-template>
+    </div>
+  </header>
+
+  <div class="public-header__backdrop" *ngIf="menuOpen" (click)="closeMenu()" aria-hidden="true"></div>
+
+  <main id="main-content" tabindex="-1" class="public-main">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="public-footer">
+    <div class="public-footer__top">
+      <div class="public-footer__brand">
+        <div class="footer-brand" aria-label="EquaMeridian Holdings">
+          <img
+            class="brand-logo brand-logo--footer"
+            src="assets/brand/logo-mark.png"
+            width="40"
+            height="40"
+            alt=""
+          />
+          <div class="footer-brand__text">
+            <span class="footer-brand__name">EquaMeridian</span>
+            <span class="footer-brand__hub">Holdings</span>
+          </div>
+        </div>
+        <p>Equipment hire marketplace for contractors and suppliers across South Africa.</p>
+      </div>
+      <div class="public-footer__cols">
+        <div>
+          <h4>Platform</h4>
+          <a routerLink="/browse">Browse machinery</a>
+          <a routerLink="/auth/register">Register</a>
+          <a routerLink="/auth/login">Sign in</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a routerLink="/policies/terms">Terms of Service</a>
+          <a routerLink="/policies/privacy">Privacy Policy</a>
+          <a routerLink="/policies/master-lease-agreement">Master Lease Agreement</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="https://www.equameridianholdings.com/" target="_blank" rel="noopener noreferrer">EquaMeridian Holdings</a>
+        </div>
+      </div>
+    </div>
+    <div class="public-footer__bottom">
+      <span>&copy; {{ currentYear }} EquaMeridian Holdings. All rights reserved.</span>
+    </div>
+  </footer>
+</div>
