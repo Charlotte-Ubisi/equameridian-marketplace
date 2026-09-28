@@ -22,12 +22,23 @@ A group project (Team 39, University of Pretoria): a marketplace where **Contrac
 - Admin tools: audit log, reports, backups, data export, content rules, fee configuration
 
 ## My contribution
-> **TODO: replace this section with your own words.** Say which parts YOU built (for example: "I built the booking flow in the API and the invoices screens in the web app"). Recruiters read this section closely.
+This was a team project, and we collaborated across the whole system. I worked mainly on three areas:
+
+**Authentication and account access**
+- Login and registration screens for contractors and suppliers, with form validation (password policy, confirm-password check)
+- Role-based access, so contractors, suppliers and admins each see only what they should
+
+**Listings**
+- Browsing and searching listings, and the listing detail view
+- Creating and editing listings as a supplier
+- Working with the API endpoints and data models behind listings
+
+**Admin dashboard and reports**
+- Admin dashboard summary and reports for managing the platform
+
+Working in a team also taught me to use Git for collaboration, follow shared coding conventions, and integrate my work with teammates' parts of the app.
 
 ## Running it locally
 Each folder has its own setup notes.
 - **API:** see `api/SECRETS_SETUP.md` (add your own connection string and keys with `dotnet user-secrets`; no real secrets are stored in this repo).
 - **Web / mobile:** `npm install`, then `ng serve` (web) or `ionic serve` (mobile).
-
-## Team
-> **TODO: list your teammates' names (with their permission).**
